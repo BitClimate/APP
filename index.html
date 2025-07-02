@@ -9,11 +9,12 @@
             color: red;
             margin-top: 10px;
             display: none;
+            text-align: center;
         }
 
         .spinner {
             display: none;
-            margin-top: 10px;
+            margin: 10px auto;
             border: 4px solid #f3f3f3;
             border-top: 4px solid #555;
             border-radius: 50%;
@@ -25,6 +26,16 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .wrap {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -48,11 +59,10 @@
                 placeholder="Enter your Password" required>
 
             <div class="wrap">
-                <button type="submit">Submit</button>
+                <button type="submit" id="submit-btn">Submit</button>
+                <div class="spinner" id="spinner"></div>
+                <div class="error" id="error-msg">Invalid username or password.</div>
             </div>
-
-            <div class="spinner" id="spinner"></div>
-            <div class="error" id="error-msg">Incorrect login info</div>
         </form>
         
         <p>Don't have an account?
@@ -63,17 +73,24 @@
     </div>
 
     <script>
-        document.getElementById("login-form").addEventListener("submit", function(e) {
+        const form = document.getElementById("login-form");
+        const spinner = document.getElementById("spinner");
+        const errorMsg = document.getElementById("error-msg");
+        const submitBtn = document.getElementById("submit-btn");
+
+        form.addEventListener("submit", function(e) {
             e.preventDefault();
 
-            // Hide error and show spinner
-            document.getElementById("error-msg").style.display = "none";
-            document.getElementById("spinner").style.display = "block";
+            // Reset view
+            errorMsg.style.display = "none";
+            spinner.style.display = "block";
+            submitBtn.disabled = true;
 
-            // Simulate loading delay
+            // Simulate login delay
             setTimeout(function() {
-                document.getElementById("spinner").style.display = "none";
-                document.getElementById("error-msg").style.display = "block";
+                spinner.style.display = "none";
+                errorMsg.style.display = "block";
+                submitBtn.disabled = false;
             }, 2000);
         });
     </script>
