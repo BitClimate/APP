@@ -2,98 +2,91 @@
 <html>
 
 <head>
-    <title>Marketplace – BitClimate</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .error {
-            color: red;
-            margin-top: 10px;
-            display: none;
-            text-align: center;
-        }
+  <title>Marketplace – BitClimate</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .spinner {
+      display: none;
+      margin: 10px auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #555;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
 
-        .spinner {
-            display: none;
-            margin: 10px auto;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #555;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
 
-        .wrap {
-            text-align: center;
-            margin-top: 15px;
-        }
+    .status-container {
+      text-align: center;
+      margin-top: -5px;
+    }
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-    </style>
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="main">
-        <h1>Marketplace Portal</h1>
-        <h3>Enter your login credentials</h3>
+  <div class="main">
+    <h1>Marketplace Portal</h1>
+    <h3>Enter your login credentials</h3>
 
-        <form id="login-form">
-            <label for="first">
-                Username:
-            </label>
-            <input type="text" id="first" name="first" 
-                placeholder="Enter your Username" required>
+    <form id="login-form">
+      <label for="first">Username:</label>
+      <input type="text" id="first" name="first" placeholder="Enter your Username" required>
 
-            <label for="password">
-                Password:
-            </label>
-            <input type="password" id="password" name="password" 
-                placeholder="Enter your Password" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your Password" required>
 
-            <div class="wrap">
-                <button type="submit" id="submit-btn">Submit</button>
-                <div class="spinner" id="spinner"></div>
-                <div class="error" id="error-msg">Invalid username or password.</div>
-            </div>
-        </form>
-        
-        <p>Don't have an account?
-            <a href="https://www.bitclimate.com/contact" style="text-decoration: none;">
-                Contact us
-            </a>
-        </p>
-    </div>
+      <div class="wrap">
+        <button type="submit" id="submit-btn">Submit</button>
+      </div>
 
-    <script>
-        const form = document.getElementById("login-form");
-        const spinner = document.getElementById("spinner");
-        const errorMsg = document.getElementById("error-msg");
-        const submitBtn = document.getElementById("submit-btn");
+      <div class="status-container">
+        <div class="spinner" id="spinner"></div>
+        <div class="error" id="error-msg">Invalid username or password.</div>
+      </div>
+    </form>
 
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
+    <p>Don't have an account?
+      <a href="https://www.bitclimate.com/contact" style="text-decoration: none;">Contact us</a>
+    </p>
+  </div>
 
-            // Reset view
-            errorMsg.style.display = "none";
-            spinner.style.display = "block";
-            submitBtn.disabled = true;
+  <script>
+    const form = document.getElementById("login-form");
+    const spinner = document.getElementById("spinner");
+    const errorMsg = document.getElementById("error-msg");
+    const submitBtn = document.getElementById("submit-btn");
 
-            // Simulate login delay
-            setTimeout(function() {
-                spinner.style.display = "none";
-                errorMsg.style.display = "block";
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    </script>
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Reset state
+      errorMsg.style.display = "none";
+      spinner.style.display = "block";
+      submitBtn.disabled = true;
+
+      setTimeout(function () {
+        spinner.style.display = "none";
+        errorMsg.style.display = "block";
+        submitBtn.disabled = false;
+      }, 2000);
+    });
+  </script>
 </body>
 
 </html>
