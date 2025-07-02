@@ -4,6 +4,13 @@
 <head>
     <title>Marketplace – BitClimate</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .error {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -11,7 +18,7 @@
         <h1>Marketplace Portal</h1>
         <h3>Enter your login credentials</h3>
 
-        <form action="">
+        <form id="login-form">
             <label for="first">
                 Username:
             </label>
@@ -29,6 +36,8 @@
                     Submit
                 </button>
             </div>
+
+            <div class="error" id="error-msg">Incorrect login info</div>
         </form>
         
         <p>Don't have an account?
@@ -37,6 +46,13 @@
             </a>
         </p>
     </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+            e.preventDefault(); // stop form from submitting
+            document.getElementById("error-msg").style.display = "block";
+        });
+    </script>
 </body>
 
 </html>
