@@ -10,6 +10,22 @@
             margin-top: 10px;
             display: none;
         }
+
+        .spinner {
+            display: none;
+            margin-top: 10px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #555;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 
@@ -32,11 +48,10 @@
                 placeholder="Enter your Password" required>
 
             <div class="wrap">
-                <button type="submit">
-                    Submit
-                </button>
+                <button type="submit">Submit</button>
             </div>
 
+            <div class="spinner" id="spinner"></div>
             <div class="error" id="error-msg">Incorrect login info</div>
         </form>
         
@@ -49,8 +64,17 @@
 
     <script>
         document.getElementById("login-form").addEventListener("submit", function(e) {
-            e.preventDefault(); // stop form from submitting
-            document.getElementById("error-msg").style.display = "block";
+            e.preventDefault();
+
+            // Hide error and show spinner
+            document.getElementById("error-msg").style.display = "none";
+            document.getElementById("spinner").style.display = "block";
+
+            // Simulate loading delay
+            setTimeout(function() {
+                document.getElementById("spinner").style.display = "none";
+                document.getElementById("error-msg").style.display = "block";
+            }, 2000);
         });
     </script>
 </body>
